@@ -17,22 +17,24 @@ typedef struct ListeSommet{
 	int sommet;
 }str_ListeSommet,*ListeSommet;
 
-typedef struct ListeArete{
-	struct* ListeArete suivant;	
-	arete a;
-}str_ListeArete,*ListeArete;
+//typedef struct ListeArete{
+//	struct* ListeArete suivant;	
+//	arete a;
+//}str_ListeArete,*ListeArete;
 
 typedef struct{
 	int taille;
-	ListeArete debutA;
+	//ListeArete debutA;
 	ListeSommet debutS;
+	ListeSommet finS;
 }str_teteListe,*teteListe;
 
 
 teteListe newListe();
-teteListe insertSortArete(teteListe l,int depart,int arrivee,int poids);
+//teteListe insertSortArete(teteListe l,int depart,int arrivee,int poids);
 teteListe insertSortSommet(teteListe l,int sommet);
-arete depilerListeArete(teteListe l);
+//arete depilerListeArete(teteListe l);
+teteListe insertFin(teteListe l,int sommet);
 teteListe unionListeSommet(teteListe l1,teteListe l2);
 bool egauxListeSommet(teteListe l1,teteListe l2);
 void deleteListe(teteListe l);

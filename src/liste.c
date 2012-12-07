@@ -3,13 +3,14 @@
 
 teteListe newListe{
 	teteListe l=malloc(sizeof(str_teteListe));
-	l->debutA=NULL;
+	//l->debutA=NULL;
 	l->debutS=NULL;
+	l->finS=NULL;
 	l->taille=0;	
 	return l;
 }
 
-
+/*
 teteListe insertSortArete(teteListe l,int depart,int arrivee,int poids){
 	arete a=malloc(sizeof(str_arete));	
 	a->depart=depart;
@@ -57,7 +58,7 @@ teteListe insertSortArete(teteListe l,int depart,int arrivee,int poids){
 		}
 	} 
 }
-
+*/
 
 teteListe insertSortSommet(teteListe l,int sommet){
 
@@ -67,6 +68,7 @@ teteListe insertSortSommet(teteListe l,int sommet){
 
 	if(l->debutS==NULL)
 		l->debutS=ls;
+		l->finS=ls;
 	else{
 		ListeSommet courante=l->debutS;
 		if(courante->sommet>sommet){
@@ -96,6 +98,7 @@ teteListe insertSortSommet(teteListe l,int sommet){
 			else{
 				courante->suivant=ls;
 				ls->suivant=NULL;
+				l->finS=ls;
 				l->taille++;
 				return l;
 			}
@@ -104,7 +107,7 @@ teteListe insertSortSommet(teteListe l,int sommet){
 }
 
 
-
+/*
 arete depilerListeArete(teteListe l){
 
 	arete a=l->debutA->a;
@@ -112,7 +115,18 @@ arete depilerListeArete(teteListe l){
 	return arete;
 }
 
+*/
+teteListe insertFin(teteListe l,int sommet){
+	
+	ListeSommet ls=malloc(sizeof(str_ListeSommet));
+	ls->sommet=sommet;
+	ls->suivant=NULL;
 
+	l->finS->suivant=ls;
+	l->finS=ls;
+	
+	return l;
+}
 
 teteListe unionListeSommet(teteListe l1,teteListe l2){
 
@@ -141,13 +155,13 @@ teteListe unionListeSommet(teteListe l1,teteListe l2){
 			return sommetUni;
 		else if(liste1==NULL){
 			while(liste2!=NULL){
-				insertSortSommet(sommetUni,liste2->sommet);
+				insertFin(sommetUni,liste2->sommet);
 				liste2=liste2->suivant;
 			}
 		}
 		else{ 
 			while(liste2!=NULL){
-				insertSortSommet(sommetUni,liste2->sommet);
+				insertFin(sommetUni,liste2->sommet);
 				liste2=liste2->suivant;
 			}
 		}
@@ -161,6 +175,13 @@ bool egauxListeSommet(teteListe l1,teteListe l2){
 	if(l1->taille!=l2->taille)
 		return false;
 	
+	if(l1->debutS->sommet!=l2->debutS->sommet)
+		return false;
+
+	if(l1->finS->sommet!=l2->finS->sommet)
+		return false;
+
+
 	ListeSommet liste1=l1->debutS;
 	ListeSommet liste2=l2->debutS;
 	
@@ -189,6 +210,7 @@ void deleteListe(teteListe l){
 		}
 	free(l);
 	}
+	/*
 	else if(l->debutA!=NULL){
 		ListeArete tmp;
 		ListeArete liste=l->debutA;
@@ -201,4 +223,5 @@ void deleteListe(teteListe l){
 		}
 		free(l);		
 	}
+	*/
 }
