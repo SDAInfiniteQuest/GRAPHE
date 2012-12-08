@@ -24,8 +24,9 @@ listeAretes supElt(listeAretes l,arete a)
 	{
 		if(egArete(l->liste[i],a)) 
 		{
-			l=echArete(l,i,(l->offset-1));
-			free(l->liste[l->offset--]);
+			l->offset--;
+			l=echArete(l,i,(l->offset));
+			free(l->liste[l->offset]);
 			break;
 		}
 	}
