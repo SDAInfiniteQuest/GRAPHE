@@ -74,7 +74,7 @@ listeAretes majl(listeAretes l,ens e,graphe g,S x)
 		}
 	}
 	l=triListe(l);
-	printl(l);
+	//printl(l);
 	return l;
 }
 
@@ -85,7 +85,7 @@ foret prim(graphe g,S x)
 	ens e=plein();
 	S sommetCourant=x;
 
-	int i=0;
+	int i=1;
 	while(i<MAX_SOMMET)
 	{
 		e=del(e,sommetCourant);

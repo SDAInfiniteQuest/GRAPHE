@@ -25,9 +25,9 @@ main ()
 		g->a[i]=tab[i];
 	}*/
 	fillg(g,1);
-	printg(g);
+	//printg(g);
 	foret f=prim(g,0);
-	printg(f);
+	//printg(f);
 
 	return 0;
 }
