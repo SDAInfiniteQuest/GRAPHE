@@ -1,0 +1,55 @@
+Spéc: GRAPHE_PONDERE étend ARC_PONDERE
+	sorte graphe
+	
+Opérations: 
+	grnouv: -> graphe // crée un graphe vide
+	adjs: graphe, S -> graphe // ajout d'un sommet au graphe
+	adja: graphe, arcp -> graphe // ajout d'un arc
+	sups: graphe, S -> graphe // suppression d'un sommet
+	supa: graphe, arcp -> graphe // suppression d'un arc
+	exs: graphe, S -> Bool // test l'existence d'un sommet
+	exa: graphe, arcp -> Bool //test l'existence d'un arc
+	di: graphe, S -> Nat // degré intérieur du sommet S
+	de: graphe, S -> Nat // degré extérieur du sommet S
+	//on peut prendre S=Nat pour toutes ces opérations
+	
+préconditions:
+	pré adjs(g,x)= ¬exs(g,x)
+	pré adja(g,a)= 
+		exs(g,source(a)) et exs(g,dest(b)) et ¬exa(g,a) et source(a)≠dest(a)
+	pré sups(g,x)= (di(g,x)==de(g,x)==0)
+	
+axiomes:
+	sups(grnouv(),x)=grnouv()
+	sups(adjs(g,x),y)=
+		si x==y alors g
+		sinon adjs(sups(g,y),x) fin_si
+	sups(adja(g,x,y),z)=adja(sups(g,z),x,y,l)
+	supa(grnouv(),a)=grnouv()
+	supa(adjs(g,x),a)=adjs(supa(g,a),x)
+	supa(adja(g,a),b)=
+		si agArc(a,b) alors g
+		sinon adja(supa(g,b),a) fin_si
+	exs(grnouv(),x)=faux
+	exs(adjs(g,x),y)=
+		si x==y alors vrai 
+		sinon exs(g,y) fin_si
+	exs(adja(g,a),z)=
+		si source(a)==z ou dest(a)==z alors vrai 
+		sinon exs(g,z) fin_si
+	exa(grnouv(),x,y)=faux
+	exa(adjs(g,x),a)=exa(g,a)
+	exa(adja(g,a),b)=egArc(a,b) ou exa(g,b)
+	di(grnouv(),x)=0
+	di(adjs(g,x),y)=di(g,y)
+	di(adja(g,a),z)=
+		si dest(a)==z alors di(g,z) +1
+		sinon di(g,z) fin_si
+	de(grnouv(),x)=0
+	de(adjs(g,x),y)=de(g,y)
+	de(adja(g,a),z)= 
+		si source(a)==z alors de(g,z) +1
+		sinon de(g,z) fin_si
+	
+finSpéc
+	

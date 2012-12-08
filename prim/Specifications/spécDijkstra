@@ -1,0 +1,58 @@
+spéc DIJSKTRA étend ENSEMBLE, FORET_GENERALE
+		
+Opérations:
+	amin: graphe, foret, ens -> arc // renvoie un sommet de e minimisant la distance depuis l'origine aux autres sommets de e
+	majf: graphe, S, foret, ens -> foret, ens // met à jour l'ensemble et la foret
+	dijkstra: graphe, S -> foret // algorithme de dijkstra renvoyant une foret à partir d'un graphe
+
+Préconditions:
+	
+	
+Axiomes:
+	amin(g,f,e)=
+		init: len ← M
+		init: a ← arc(x,y) avec x=0 et y=0 // on suppose que les sommets sont indicés par des entiers
+		init: z ← arcVide()
+		pour_tout x
+		faire
+			pour_tout y
+			faire
+				a ← arc(x,y)
+				si exa(g,a) et dest(a)Ee et ¬source(a)Ee et arclen(a)<len alors z=a
+				fin_si
+			fin_faire
+		fin_faire
+		f ← insArc(f,z)
+		e ← d(e,z)
+		retourner z
+		
+	// on retourne f mais on modifie e par effet de bord
+	// la variable origine sera déclaré de manière à être accessible pour la fonction majf
+	majf(g,x,f,e)=
+		//on met à jour e
+		e ← union(e,esucc(x))
+		init: y ← 0
+		pour_tout yEe
+		faire
+			si dm(origine, y)>dm(origine,y)+arclen(pere(f,x),x) 
+				faire
+					f ← sup(pere(y),y)
+					f ← insArc(x,y)
+				fin_faire
+			fin_si
+		fin_faire
+		retourner f
+	
+	dijkstra(g,x)=
+		origine ← x
+		init: f ← foretNouv()
+		init: e ← esucc(g,x)
+		init: a ← amin(g,f,e)
+		tant_que a≠arcVide()
+		faire 
+			majf(g,dest(a),f,e)
+			a ← amin(g,f,e)
+		fin_faire
+		retourner f
+		
+fin_spéc		

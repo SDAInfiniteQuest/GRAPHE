@@ -1,0 +1,27 @@
+Spéc ENSEMBLE étend BASE
+	sorte ens
+	
+Opérations:
+	Ø: -> ens // crée un ensemble vide
+	i: ens, S -> ens // insere un élément dans un ensemble
+	d ens, d -> ens // supprime un éléménet d'un ensemble
+	_E_: S, ens -> Bool // test l'appartenance d'un élément à un ensemble
+	v: ens -> Bool // test si un ensemble est vide ou non
+	card: ens -> Nat // renvoie le cardinal d'un ensemble
+	
+Préconditions:
+	pré i(e,x)= ¬xEe
+	pré d(e,x)=xEe
+	
+Axiomes:
+	xEØ=faux
+	xEi(e,y)=
+		si x==y alors vrai 
+		sinon xEe fin_si
+	v(Ø)=vrai
+	v(i(e,x))=faux
+	card(Ø)=0
+	card(i(e,x))=1+card(e)
+	d(i(e,x),y)=
+		si x==y alors e
+		sinon d(e,y) fin_si	

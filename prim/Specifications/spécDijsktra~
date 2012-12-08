@@ -1,0 +1,12 @@
+spéc DIJSKTRA étend ENSEMBLE, FORET_GENERALE
+		
+Opérations:
+	smin: graphe, foret, e -> S // renvoie un sommet de e minimisant la distance depuis l'origine aux autres sommets de e
+	majf: graphe, S, foret, e -> f, e // met à jour l'ensemble et la foret
+	dijkstra: graphe, S -> foret // algorithme de dijkstra renvoyant une foret à partir d'un graphe
+
+Préconditions:
+	
+
+Axiomes:
+	
