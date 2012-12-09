@@ -41,11 +41,10 @@ Matrix newMatrix(int taille);
 *	/details	Alloue la nouvelle matrice , et la remplie grace a remplirComplet()
 *
 *	@param	taille Taille de la matrice carre a creer
-*	@param	oriente Pour savoir si le graphe est oriente
 * @return	m la matrice nouvellement alloue et remplie
 **/
 
-Matrix grapheComplet(int taille,bool oriente);
+Matrix grapheComplet(int taille);
 
 
 /**
@@ -54,10 +53,9 @@ Matrix grapheComplet(int taille,bool oriente);
 *	/details	Alloue la nouvelle matrice cree,et la remplie grace a remplirPartiel()
 *
 *	@param	taille Taille de la matrice carre a creer
-*	@param	oriente Pour savoir si le graphe est oriente
 * @return	m la matrice nouvellement alloue
 **/
-Matrix graphePartiel(int taille,bool oriente);
+Matrix graphePartiel(int taille);
 
 /**
 * /brief		Remplie une matrice en satisfaisant le fait que le graphe ainsi
@@ -68,10 +66,9 @@ Matrix graphePartiel(int taille,bool oriente);
 *	copira ces choix dans la matrice triangulaire inferieur
 *
 *	@param	m La matrice a remplir  
-* @param	oriente Un bool,determinant si le graphe a creer doit etres oriente ou pas
 *	@return m La matrice ainsi cree
 **/
-Matrix remplirComplet(Matrix m,bool oriente);
+Matrix remplirComplet(Matrix m);
 
 
 /**
@@ -87,10 +84,9 @@ Matrix remplirComplet(Matrix m,bool oriente);
 *	de creer et de rajouter des arcs.
 *
 *	@param	m La matrice a remplir 
-* @param	oriente Un bool,determinant si le graphe a creer doit etres oriente ou pas
 *	@return f La matrice ainsi cree
 **/
-Matrix remplirPartiel(Matrix m,bool oriente);
+Matrix remplirPartiel(Matrix m);
 
 
 /**

@@ -22,10 +22,9 @@
 *	matrice, prive de la diagonale.
 *
 *	@param	m la matrice dont ont veut extraire les aretes
-*	@param	oriente bool pour savoir si la matrice est oriente ou non
 * @return	a le tableau d'arete creer et initialiser
 **/
-arete* matrixToArete(Matrix m,bool oriente);
+arete* matrixToArete(Matrix m);
 
 
 /**
@@ -46,11 +45,10 @@ tableSommet* vertexToTable(Matrix m);
 *	boolAffiche=true
 *
 *	@param	m La matrice d'adjacence dont on veut l'arbre de poids minimal
-*	@param	oriente  Booleen pour savoir si le graphe est oriente ou non
 *	@param	boolAffiche Booleen pour l'affichage ou non du resulat 
 * @return	f La matrice d'adjacence correspondant a l'arbre de poids minimun
 **/
-Matrix kruskal(Matrix m,bool oriente,bool boolAffiche);
+Matrix kruskal(Matrix m,bool boolAffiche);
 
 
 

@@ -21,30 +21,22 @@ Matrix newMatrix(int taille){
 	return m;
 }
 
-Matrix remplirComplet(Matrix m,bool oriente){
+Matrix remplirComplet(Matrix m){
 	int i,j;
 	int taille=m->taille;
 	int** mat=m->mat;		//On economise une accession par tour de boucle;
 
-	if(oriente==false){
 		for(i=0;i<taille;i++){
 			for(j=i;j<taille;j++){
 				mat[i][j]=rand()%taille+1;
 				mat[j][i]=mat[i][j];
 			}
 		}
-	}else if(oriente==true){
-		for(i=0;i<taille;i++){
-			for(j=0;j<taille;j++){
-				mat[i][j]=rand()%taille+1;
-			}
-		}	
-	}
 
 return m;
 }
 
-Matrix remplirPartiel(Matrix m,bool oriente){
+Matrix remplirPartiel(Matrix m){
 	
 	int i,j;
 	int taille=m->taille;
@@ -53,7 +45,6 @@ Matrix remplirPartiel(Matrix m,bool oriente){
 	tableSommet Vide=newTable(taille);
 	
 	insertFin(Vide,rand()%taille);
-if(oriente==false){
 	while(Vide->nbElements!=taille){
 		for(i=0;i<taille;i++){
 			for(j=i;j<taille;j++){
@@ -81,35 +72,6 @@ if(oriente==false){
 			}
 		}
 	}
-}
-else if(oriente==true){
-	while(Vide->nbElements!=taille){
-		for(i=0;i<taille;i++){
-			for(j=0;j<taille;j++){
-				if(i!=j){
-					if(rand()%2){
-						mat[i][j]=rand()%taille+1; //graphe oriente
-
-						if(estDans(Vide,i)){
-							if(!estDans(Vide,j)){
-								insertFin(Vide,i);
-							}
-						}else if(estDans(Vide,j)){
-							if(!estDans(Vide,i)){
-								insertFin(Vide,j);
-							}
-						}
-
-						if(Vide->nbElements==taille){
-							deleteTable(Vide);
-							return m;
-						}
-					}
-				}
-			}
-		}
-	}
-}
 	deleteTable(Vide);
 
 	return m;
@@ -130,16 +92,16 @@ void deleteMatrix(Matrix m){
 	free(m);
 }	
 
-Matrix graphePartiel(int taille,bool oriente){
+Matrix graphePartiel(int taille){
 	Matrix m=newMatrix(taille);
-	remplirPartiel(m,oriente);
+	remplirPartiel(m);
 	
 	return m;
 }
 
-Matrix grapheComplet(int taille,bool oriente){
+Matrix grapheComplet(int taille){
 	Matrix m=newMatrix(taille);
-	remplirComplet(m,oriente);
+	remplirComplet(m);
 	
 	return m;
 }

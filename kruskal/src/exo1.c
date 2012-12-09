@@ -8,7 +8,6 @@
 
 int main(int argc,char** argv){
 	char c;
-	bool oriente=false;
 	bool complet=true;
 	char* tvalue=NULL;
 	int taille=15;
@@ -17,11 +16,6 @@ int main(int argc,char** argv){
 	while((c=getopt(argc,argv,"oncpsrt:"))!=-1){
 		switch(c)
 		{
-		case 'o':
-			oriente=true;
-			break;
-		case 'n':
-			break;
 		case 'c':
 			break;
 		case 'r':
@@ -37,7 +31,7 @@ int main(int argc,char** argv){
 			BoolAffiche=false;
 			break;
 		case '?':
-			printf("usage: -s desactiver l'affichage  -o:graphe oriente -n: graphe non oriente -c:graphe complet -p:graphe partielle -t:taille a specifier\n");
+			printf("usage: -s desactiver l'affichage  -c:graphe complet -p:graphe partielle -t:taille a specifier\n");
 		 default:
 			abort();
 		}
@@ -50,16 +44,16 @@ int main(int argc,char** argv){
 	Matrix m;
 
 	if(complet==true)	
-		m=grapheComplet(taille,oriente);
+		m=grapheComplet(taille);
 	else
-		m=graphePartiel(taille,oriente);
+		m=graphePartiel(taille);
 	
 	if(BoolAffiche==true){
 		affichage(m);
 		printf("\n");
 	}
 
-	Matrix ARPM=kruskal(m,oriente,resultat);
+	Matrix ARPM=kruskal(m,resultat);
 	
 	if(BoolAffiche==true){
 		printf("\n");
