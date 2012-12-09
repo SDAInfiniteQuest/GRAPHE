@@ -1,0 +1,38 @@
+Spéc: FORET_GENERALE étend GRAPHE
+	sorte foret
+	
+Opérations:
+	foretNouv: -> foret //renvoie une foret vide
+	insSommet: foret, S -> foret // renvoie une sommet avec le sommet S ajouté
+	insArc: foret, arcp -> foret // insere un arc dans la forêt
+	pere: foret, S -> S // renvoie le pere d'un sommet dans foret
+	dm: foret, S -> Nat // renvoie la distance du sommet origine à S
+	
+/* On va redéfinir certaines des opérations sur les graphes pour les adapter à celles sur les forêts générales notamment en modifiant certaines préconditions */
+
+Préconditions:
+	pre insArc(f,a)=(pré adja(g,a)) et di(f,dest(a))≤1 et ¬exa(y,source(a))
+
+Axiomes:
+	// on redéfinit les constructeurs
+	foretNouv()=grnouv()
+	insSommet(f,x)=adjs(f,x)
+	insArc(f,a)=adja(f,a)
+	pere(f,x)=
+		si di(x)==0 alors Ø
+		sinon
+			y ← 0	
+			tant_que ¬exa(f,arcNouv(y,x))
+				faire y+1
+			fin tant_que
+			retourner y
+		fin_si
+	dm(foretNouv(),x)=0
+	dm(insSommet(f,y),x)=
+		si di(x)==0 ou x==y alors 0
+		sinon dm(f,x) fin_si
+	dm(insArc(f,a),x)=
+		si x==dest(a) alors arclen(a)+dm(f,source(a))
+		sinon dm(f,source(a)) fin_si
+		
+fin_spéc
