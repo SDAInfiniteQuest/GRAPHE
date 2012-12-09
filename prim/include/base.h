@@ -5,7 +5,7 @@
 #define faux 0
 
 #define	MAX_LONG 1000000
-#define MAX_SOMMET 50
+#define MAX_SOMMET 500
 
 
 typedef int Bool;

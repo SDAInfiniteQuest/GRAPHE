@@ -17,9 +17,9 @@ main (int argc,char *argv[])
 	int i;
 	graphe g=grnouv();
 	fillg(g,1);
-	printg(g);
+	printg(g,n);
 	if(n<MAX_SOMMET) f=prim(g,0,n);
-	printg(f);
+	printg(f,n);
 
 	return 0;
 }
