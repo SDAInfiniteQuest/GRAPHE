@@ -59,14 +59,14 @@ S sommetSuiv(listeAretes l,foret f)
 	return newS;
 }
 
-listeAretes majl(listeAretes l,ens e,graphe g,S x)
+listeAretes majl(listeAretes l,ens e,graphe g,S x,S fin)
 {
 	S i;
 	for(i=0;i<l->offset;i++)
 	{
 		if(!estDans(l->liste[i]->d,e)) l=supElt(l,l->liste[i]);
 	}
-	for(i=0;i<MAX_SOMMET;i++)
+	for(i=0;i<fin;i++)
 	{
 		if((g->a[x*MAX_SOMMET+i]>0)&&(estDans(i,e)))
 		{
@@ -78,7 +78,7 @@ listeAretes majl(listeAretes l,ens e,graphe g,S x)
 	return l;
 }
 
-foret prim(graphe g,S x)
+foret prim(graphe g,S x,S fin)
 {
 	foret f=grnouv();
 	listeAretes l=listeNouv();
@@ -86,10 +86,10 @@ foret prim(graphe g,S x)
 	S sommetCourant=x;
 
 	int i=1;
-	while(i<MAX_SOMMET)
+	while(i<fin)
 	{
 		e=del(e,sommetCourant);
-		l=majl(l,e,g,sommetCourant);	
+		l=majl(l,e,g,sommetCourant,fin);	
 		sommetCourant=sommetSuiv(l,f);
 		i++;
 	}

@@ -10,7 +10,7 @@ void printg(graphe g);
 void printe(ens e);
 void printl(listeAretes l);
 S sommetSuiv(listeAretes l,foret f);
-listeAretes majl(listeAretes l,ens e,graphe g,S x);
-foret prim(graphe g,S x);
+listeAretes majl(listeAretes l,ens e,graphe g,S x,S fin);
+foret prim(graphe g,S x,S fin);
 
 #endif

@@ -1,0 +1,42 @@
+spéc PRIM étend LISTE_ARETES, GRAPHE, FORET et SOUS_ENSEMBLE
+
+Opérations:
+	// fonction par effet de bord modifiant plusieurs éléments en même temps
+	majl: listeAretes, ens, graphe, S -> listeAretes // met a jour la liste des aretes et la tri
+	sommetSuiv: listeAretes, foret -> S // passe au sommet suivant
+	prim: graphe, S -> foret // prend un graphe et un sommet et renvoie un arbre couvrant de poid minimum
+	
+Pré-conditions:
+
+Axiomes:
+	majl(l,e,g,x)=
+		init i←0
+		init k←0
+		tant_que i<tailleListe(l) faire
+			si ¬estDans(dest(l[i]),e) supElt(l[i])
+		fait
+		pour_tout k dans e faire 
+			si (exa(g,creerArete(x,k))&&(estDans(k,e)) alors
+				l←adjElt(l,creerArete(x,i,vala(g,x,i))
+			fin_si
+		fait
+		triListe(l);
+		retourner l
+	sommetSuiv(l,f)=
+		init r=arclen(tete(l))
+		f←adja(f,tete(l))
+		l←sup(tete(l))
+		retourner r
+	prim(g,x)
+		init f←foretNouv()
+		init l←listeNouv()
+		init e←plein()
+		init s←x
+		tant_que ¬estVide(e) faire
+			del(e,s)
+			majl(l,e,g,s)
+			s=sommetSuiv(l,f)
+		fait 
+		retourner f
+		
+fin_spéc

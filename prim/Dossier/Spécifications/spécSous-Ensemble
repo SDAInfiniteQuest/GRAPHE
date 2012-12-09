@@ -1,0 +1,30 @@
+Spéc SOUS_ENSEMBLE étend ENSEMBLE, GRAPHE
+	sorte ens
+	
+Opérations:
+	es: graphe -> ens // prend un graphe et renvoie l'ensemble de ses sommets
+	epred: graphe, S -> ens //renvoie les prédesesseurs d'un sommet
+	esucc: graphe, S -> ens // renvoie les successeurs d'un sommet
+	
+préconditions:
+	
+axiomes:
+	es(grnouv())=Ø
+	es(adjs(g,x))=i(es(g),x)
+	es(adja(g,a))=es(g)
+	epred(grnouv(),x)=Ø
+	epred(adjs(g,x),y)=
+		si x==z alors Ø
+		sinon epred(g,y) fin_si
+	epred(adja(g,a),x)=
+		si x==dest(a) alors i(epred(g,x),source(a))
+		sinon epred(g,x) fin_si
+	esucc(grnouv(),x)=Ø
+	esucc(adjs(g,x),y)=
+		si x==z alors Ø
+		sinon esucc(g,y) fin_si
+	esucc(adja(g,a),x)=
+		si x==source(a) alors i(esucc(g,x),dest(a))
+		sinon esucc(g,x) fin_si
+	
+fin_spéc
