@@ -2,24 +2,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-graphe fillg(graphe g,Nat k)
+graphe fillg(graphe g,Nat j)
 {
-	int i;
-	for(i=0;i<MAX_SOMMET*MAX_SOMMET;i++)
+	int i,k;
+	for(i=0;i<MAX_SOMMET;i++)
 	{
-		if((rand()%k)==0) g->a[i]=rand()%10;
+		for(k=i+1;k<MAX_SOMMET;k++)
+		{
+			if((rand()%j)==0) g->a[i*MAX_SOMMET+k]=rand()%100;
+			g->a[k*MAX_SOMMET+i]=g->a[i*MAX_SOMMET+k];
+		}
 	}
 	return g;
 }
 
-void printg(graphe g)
+void printg(graphe g,Nat fin)
 {
 	int i,j;
 	printf("\n");
-	for(i=0;i<MAX_SOMMET;i++)
+	for(i=0;i<fin;i++)
 	{
-		for(j=0;j<MAX_SOMMET;j++)
-			printf("%d ",g->a[i*g->taille+j]);
+		for(j=0;j<fin;j++)
+			printf("%3d ",g->a[i*MAX_SOMMET+j]);
 		printf("\n");
 	}
 	printf("\n");
@@ -48,13 +52,14 @@ void printl(listeAretes l)
 	printf("\n");
 }
 
-S sommetSuiv(listeAretes l,foret f)
+S sommetSuiv(listeAretes l,foret f,ens e)
 {
 	arete a;
 	S newS;
 	a=plusPetit(l);
 	f=adja(f,a->s,a->d,a->l);
-	newS=a->d;
+	if(estDans(a->d,e)) newS=a->d;
+	else newS=a->s;
 	l=supElt(l,a);
 	return newS;
 }
@@ -89,8 +94,9 @@ foret prim(graphe g,S x,S fin)
 	while(i<fin)
 	{
 		e=del(e,sommetCourant);
+		//printe(e);
 		l=majl(l,e,g,sommetCourant,fin);	
-		sommetCourant=sommetSuiv(l,f);
+		sommetCourant=sommetSuiv(l,f,e);
 		i++;
 	}
 

@@ -4,6 +4,9 @@ Descritpion:
 	Les graphes générés ne sont pas nécessairement complets. Ainsi si le graphe généré aléatoirement n'est pas connexe, une erreur peut éventuellement survenir (cela est très rare car les graphes générés sont très denses).
 
 Principe et Performances:
-	Le programme offre des performances relativement médiocres à partir d'un graphe de taille 200. Cela est essentiellement dû aux nombreux tris qui ralentissent l'exécution, en effet, à chaque itération on parcourt un nouveau sommet et le tri est appelé lorsque les nouveaux arcs de la frontiere on été ajoutés ont été ajoutés
+	Le programme offre des performances relativement médiocres à partir d'un graphe de taille 200 (plus de 10 secondes). Cela est essentiellement dû aux nombreux tris qui ralentissent l'exécution, en effet, à chaque itération on parcourt un nouveau sommet et le tri est appelé lorsque les nouveaux arcs de la frontiere ont été ajoutés.
 
 Améliorations possibles:
+	Un autre algorithme de tri que le tri rapide serait peut-etre préférable comme un tri par tas, les différentes listes se succédants étant toutes partiellement triées. le principe serait donc de garder une partie de la liste deja trié et trier seulement la partie nouvellement ajoutée.
+	Au niveau de la mémoire il est également possible d'économiser une partie de la mémoire, les graphes étant symétriques, il suffit alors de déclarer une matrice triangulaire supérieure avec les fonctions d'adressage nécessaire.
+	Il est également possible d'améliorer le code les nombreux appels de fonctions peuvent générer de nombreux changement de contexte en déclarant lorque c'est possible les fonctions avec l'option inline bien que cela nuise à la modularité à la modularité du code.
