@@ -1,0 +1,14 @@
+Spéc ARC_PONDERE étend ARC
+	sorte arcp
+	
+Opérations:
+	arcpNouv: arc, Nat -> arcp // crée un arc pondéré
+	arclen: arcp -> Nat // renvoie la longueur de l'arc
+	
+Préconditions:
+	arcpNouv(a,l)=l<M
+	
+Axiomes:
+	arclen(arcpNouv(a,l))=l
+	
+fin_spéc
