@@ -22,7 +22,10 @@ arete* matrixToArete(Matrix m){
 			}
 		}
 
-	quicksort(areteTrie,0,k);
+
+	quicksort(areteTrie,0,k-1);
+
+
 	return areteTrie;
 }
 
@@ -52,7 +55,6 @@ Matrix kruskal(Matrix m,bool boolAffiche){
 	int i=0;
 	int nbSommet=m->taille;
 	int areteAjouter=0;
-	int taille=m->taille;
 	arete areteCourante;
 
 		while(areteAjouter!=nbSommet-1){
@@ -60,18 +62,18 @@ Matrix kruskal(Matrix m,bool boolAffiche){
 			if(!egauxListeSommet(tableEnsemble[areteCourante.depart],tableEnsemble[areteCourante.arrivee])){
 				arbre[areteCourante.depart][areteCourante.arrivee]=areteCourante.poids;
 				arbre[areteCourante.arrivee][areteCourante.depart]=areteCourante.poids;
-
+			
 				poidsTotal+=areteCourante.poids;
 				tableSommet	newEnsemble=unionListeSommet(tableEnsemble[areteCourante.depart],tableEnsemble[areteCourante.arrivee]);
-
-
-				deleteTable(tableEnsemble[areteCourante.depart]);
-				deleteTable(tableEnsemble[areteCourante.arrivee]);
-
-				tableSommet newEnsemble2=copieTable(newEnsemble);
-
-				tableEnsemble[areteCourante.depart]=newEnsemble;
-				tableEnsemble[areteCourante.arrivee]=newEnsemble2;
+				
+				int* sommetdeEnsemble=newEnsemble->tab;
+				
+				
+					deleteTable(tableEnsemble[areteCourante.depart]);
+					deleteTable(tableEnsemble[areteCourante.arrivee]);
+				for(i=0;i<newEnsemble->nbElements;i++){
+					tableEnsemble[sommetdeEnsemble[i]]=newEnsemble;
+				}
 
 				areteAjouter++;
 			}
@@ -79,12 +81,7 @@ Matrix kruskal(Matrix m,bool boolAffiche){
 		}
 
 
-
-
-
-	for(i=0;i<taille;i++){
-		deleteTable(tableEnsemble[i]);
-	}
+	deleteTable(tableEnsemble[0]);
 
 	free(tableEnsemble);
 	deleteTabArete(areteTrie);
